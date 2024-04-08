@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        /* CSS for styling web pages */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Countdown Timer</h1>
+<p id="timer"></p>
+
+<script>
+    // Specify start date and time
+    var startTime = new Date();
+
+    // Specify end date and time (7 days from now)
+    var endTime = new Date();
+    endTime.setDate(startTime.getDate() + 7);
+
+    // Call the updateTimer() function every 1 second
+    var timerInterval = setInterval(updateTimer, 1000);
+
+    function updateTimer() {
+        // Stop counting if the time exceeds 7 days
+        if (new Date() > endTime) {
+            clearInterval(timerInterval);
+            document.getElementById("timer").innerHTML = "Time's up!";
+            return;
+        }
+
+        // Calculate the remaining time
+        var timeDiff = endTime - new Date();
+        var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        // Display the result in the format 'days hours minutes seconds'
+        document.getElementById("timer").innerHTML = days + " วัน " + hours + " ชั่วโมง " + minutes + " นาที " + seconds + " วินาที";
+    }
+</script>
+
+</body>
+</html>
